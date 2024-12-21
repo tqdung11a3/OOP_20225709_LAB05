@@ -1,0 +1,33 @@
+1) Thay vì sử dụng Comparator để so sánh các mục trong giỏ hàng, chúng ta có thể sử dụng giao diện Comparable và ghi đè phương thức compareTo().
+2)  Lớp nào nên triển khai giao diện Comparable?
+-  Lớp nên triển khai giao diện Comparable là lớp chứa đối tượng mà bạn muốn so sánh, trong trường hợp này, là abstract class “Media”.
+3) Trong các lớp đó, phải triển khai phương thức compareTo() như thế nào để phản ánh đúng thứ tự mà chúng ta muốn?
+-  Để triển khai phương thức compareTo() thì cần so sánh các thuộc tính của đối tượng. Đối với yêu cầu sắp xếp theo title sau đó là cost, có thể triển khai như sau:
+
+public int compareTo(Media m) {
+ if (!this.getTitle().equals(m.getTitle())) {
+ return this.getTitle().compareTo(m.getTitle());
+ } else {
+ 	if (this.getCost() < m.getCost()) {
+		return -1;
+	else{
+		return 1;
+ }
+}
+4) Liệu có thể có hai quy tắc sắp xếp (theo title sau đó là cost và theo cost sau đó là title) nếu sử dụng cách tiếp cận này với giao diện Comparable?
+- Câu trả lời là không, bởi vì ta chỉ có một quy tắc sắp xếp cho mỗi lớp. Điều này là do phương thức compareTo() chỉ trả về một giá trị int.
+5) Giả sử các đĩa DVD có một quy tắc sắp xếp khác biệt so với các loại phương tiện khác, tức là theo tiêu đề, sau đó là độ dài giảm dần, sau đó là giá. Ta sẽ làm thế nào để điều chỉnh mã của mình để cho phép điều này?
+- Có thể tạo một lớp riêng cho DVD và triển khai phương thức compareTo():
+public class DVD extends Media implements Comparable<DVD> {
+
+ public int compareTo(DVD d) {
+ if (!this.getTitle().equals(d.getTitle())) {
+ return this.getTitle().compareTo(other.getTitle());
+ } else {
+	this.getLength() < o.getLength{
+		return -1;
+ }
+	else{
+		return 1;
+ }
+}
